@@ -36,3 +36,43 @@ The app sends this, along with the live list of tutors from the database, to the
 2. A **short, personalized outreach message** the student can copy and send directly to their top match
 
 ### System Prompt Used
+The API key is stored securely as an environment variable and is never committed to this repository.
+
+## 🛠️ Tools, Services & Models Used
+
+| Purpose | Tool/Service |
+|---|---|
+| App builder | [Lovable](https://lovable.dev/) |
+| Frontend | React, TypeScript, Tailwind CSS, TanStack Start |
+| Database | Supabase |
+| AI model | Google Gemini API |
+| Hosting/Deployment | Lovable (published app) |
+| Version control | GitHub |
+
+## 📸 Screenshots
+
+![Homepage](./screenshots/homepage.png)
+![Find My Tutor - AI Matching](./screenshots/find-my-tutor.png)
+![Add a Tutor Form](./screenshots/add-tutor.png)
+
+## 🚀 How to Run This Project Locally
+
+You need [Node.js](https://nodejs.org/) and npm installed (recommended via [nvm](https://github.com/nvm-sh/nvm#installing-and-updating)).
+
+```bash
+git clone <this-repository-url>
+cd <repository-name>
+npm i
+npm run dev
+```
+
+You'll also need to set up your own environment variables for Supabase and the Gemini API key (see `.env.example` if present, or Lovable's project settings) — **never commit real API keys to this repository.**
+
+## Built With
+
+- TanStack Start
+- TypeScript
+- React
+- Tailwind CSS
+- Supabase
+- Google Gemini API
