@@ -14,7 +14,48 @@ export type Database = {
   }
   public: {
     Tables: {
-      [_ in never]: never
+      tutors: {
+        Row: {
+          area: string
+          bio: string | null
+          city: string
+          contact_email: string | null
+          contact_phone: string | null
+          created_at: string
+          experience_years: number
+          id: string
+          name: string
+          rate_per_hour: number
+          subjects: string[]
+        }
+        Insert: {
+          area: string
+          bio?: string | null
+          city?: string
+          contact_email?: string | null
+          contact_phone?: string | null
+          created_at?: string
+          experience_years?: number
+          id?: string
+          name: string
+          rate_per_hour: number
+          subjects?: string[]
+        }
+        Update: {
+          area?: string
+          bio?: string | null
+          city?: string
+          contact_email?: string | null
+          contact_phone?: string | null
+          created_at?: string
+          experience_years?: number
+          id?: string
+          name?: string
+          rate_per_hour?: number
+          subjects?: string[]
+        }
+        Relationships: []
+      }
     }
     Views: {
       [_ in never]: never
