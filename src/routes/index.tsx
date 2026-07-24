@@ -23,8 +23,8 @@ export const Route = createFileRoute("/")({
     meta: [
       { title: "Ustaad Finder — Find Trusted Local Tutors in Pakistan" },
       { name: "description", content: "Browse verified local tutors across Pakistan. Search by subject and area, read reviews, and message the right ustaad for your child." },
-      { property: "og:title", content: "Ustaad Finder — Trusted Local Tutors" },
-      { property: "og:description", content: "Find and message verified local tutors across Pakistan." },
+      { property: "og:title", content: "Ustaad Finder — Find Trusted Local Tutors in Pakistan" },
+      { property: "og:description", content: "Browse verified local tutors across Pakistan. Search by subject and area, read reviews, and message the right ustaad for your child." },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
     ],
