@@ -1,7 +1,7 @@
 import { createFileRoute, Link, useNavigate } from "@tanstack/react-router";
 import { useServerFn } from "@tanstack/react-start";
 import { useState } from "react";
-import { ArrowLeft, GraduationCap, Sparkles, Copy, Check, MapPin } from "lucide-react";
+import { Sparkles, Copy, Check, MapPin } from "lucide-react";
 import { toast } from "sonner";
 import { matchTutor, type MatchResult } from "@/lib/match-tutor.functions";
 import { Button } from "@/components/ui/button";
@@ -16,6 +16,8 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
+import { Navbar } from "@/components/Navbar";
+
 
 export const Route = createFileRoute("/find-tutor")({
   component: FindTutor,
@@ -81,26 +83,19 @@ function FindTutor() {
 
   return (
     <div className="min-h-screen bg-background">
-      <header className="border-b bg-card">
-        <div className="mx-auto flex max-w-3xl items-center justify-between px-4 py-4">
-          <Link to="/" className="flex items-center gap-2 text-sm text-muted-foreground hover:text-foreground">
-            <ArrowLeft className="h-4 w-4" /> Back
-          </Link>
-          <div className="flex items-center gap-2">
-            <GraduationCap className="h-5 w-5 text-primary" />
-            <span className="font-semibold">Ustaad Finder</span>
-          </div>
-        </div>
-      </header>
+      <Navbar />
 
-      <main className="mx-auto max-w-3xl px-4 py-8">
+      <main className="mx-auto max-w-3xl px-4 py-10">
         <div className="flex items-center gap-2">
-          <Sparkles className="h-5 w-5 text-primary" />
-          <h1 className="text-2xl font-bold tracking-tight sm:text-3xl">Find My Tutor</h1>
+          <span className="grid h-9 w-9 place-items-center rounded-xl bg-primary-soft text-primary ring-1 ring-inset ring-primary/20">
+            <Sparkles className="h-5 w-5" />
+          </span>
+          <h1 className="font-display text-3xl font-semibold tracking-tight sm:text-4xl">Find My Tutor</h1>
         </div>
-        <p className="mt-1 text-sm text-muted-foreground">
+        <p className="mt-2 text-sm text-muted-foreground">
           Tell us what you're studying and we'll match you with the best tutors from our directory.
         </p>
+
 
         <form onSubmit={onSubmit} className="mt-6 grid gap-4">
           <div className="grid gap-1.5">
