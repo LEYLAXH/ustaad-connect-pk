@@ -26,8 +26,8 @@ const SYSTEM_PROMPT =
 export const matchTutor = createServerFn({ method: "POST" })
   .inputValidator((data: unknown) => InputSchema.parse(data))
   .handler(async ({ data }): Promise<MatchResult> => {
-    const apiKey = process.env.GEMINI_API_KEY;
-    if (!apiKey) throw new Error("GEMINI_API_KEY is not configured");
+    const apiKey = process.env.LOVABLE_API_KEY;
+    if (!apiKey) throw new Error("LOVABLE_API_KEY is not configured");
 
     const { supabaseAdmin } = await import("@/integrations/supabase/client.server");
     const { data: tutorsData, error } = await supabaseAdmin
@@ -62,32 +62,35 @@ Return ONLY strict JSON matching this schema (no markdown, no code fences):
 }
 Include 2-3 matches, best first. If no tutors are available, return an empty matches array and a message explaining that.`;
 
-    const res = await fetch(
-      `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=${encodeURIComponent(apiKey)}`,
-      {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          systemInstruction: { parts: [{ text: SYSTEM_PROMPT }] },
-          contents: [{ role: "user", parts: [{ text: userPrompt }] }],
-          generationConfig: {
-            temperature: 0.7,
-            responseMimeType: "application/json",
-          },
-        }),
+    const res = await fetch("https://ai.gateway.lovable.dev/v1/chat/completions", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${apiKey}`,
       },
-    );
+      body: JSON.stringify({
+        model: "google/gemini-2.5-flash",
+        messages: [
+          { role: "system", content: SYSTEM_PROMPT },
+          { role: "user", content: userPrompt },
+        ],
+        response_format: { type: "json_object" },
+        temperature: 0.7,
+      }),
+    });
 
     if (!res.ok) {
       const errText = await res.text();
-      console.error("[matchTutor] Gemini error", res.status, errText);
-      throw new Error(`Gemini API failed (${res.status})`);
+      console.error("[matchTutor] AI gateway error", res.status, errText);
+      if (res.status === 429) throw new Error("Rate limit reached, please try again shortly.");
+      if (res.status === 402) throw new Error("AI credits exhausted. Please add credits in your workspace.");
+      throw new Error(`AI request failed (${res.status})`);
     }
 
     const json = (await res.json()) as {
-      candidates?: Array<{ content?: { parts?: Array<{ text?: string }> } }>;
+      choices?: Array<{ message?: { content?: string } }>;
     };
-    const text = json.candidates?.[0]?.content?.parts?.[0]?.text ?? "";
+    const text = json.choices?.[0]?.message?.content ?? "";
     let parsed: MatchResult;
     try {
       parsed = JSON.parse(text) as MatchResult;
