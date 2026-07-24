@@ -1,7 +1,7 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { useQuery } from "@tanstack/react-query";
 import { useMemo, useState } from "react";
-import { Search, MapPin, GraduationCap, Clock, Plus } from "lucide-react";
+import { Search, MapPin, GraduationCap, Clock, Plus, Sparkles } from "lucide-react";
 import { fetchTutors, type Tutor } from "@/lib/tutors";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
@@ -64,11 +64,18 @@ function Home() {
             <GraduationCap className="h-6 w-6 text-primary" />
             <span className="text-lg font-bold tracking-tight">Ustaad Finder</span>
           </Link>
-          <Link to="/add-tutor">
-            <Button size="sm" className="gap-1">
-              <Plus className="h-4 w-4" /> Add Tutor
-            </Button>
-          </Link>
+          <div className="flex items-center gap-2">
+            <Link to="/find-tutor">
+              <Button size="sm" variant="outline" className="gap-1">
+                <Sparkles className="h-4 w-4" /> Find My Tutor
+              </Button>
+            </Link>
+            <Link to="/add-tutor">
+              <Button size="sm" className="gap-1">
+                <Plus className="h-4 w-4" /> Add Tutor
+              </Button>
+            </Link>
+          </div>
         </div>
       </header>
 
