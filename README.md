@@ -58,15 +58,15 @@ The API key is stored securely as an environment variable and is never committed
 <img width="1776" height="856" alt="image" src="https://github.com/user-attachments/assets/3f1b76c5-95c0-476c-9413-1b23e78c74c3" />
 
 
-![Find My Tutor - AI Matching](
-
+![Find My Tutor - AI Matching]
 <img width="1832" height="860" alt="image" src="https://github.com/user-attachments/assets/71de6711-eb9e-4e40-b074-d314abdb0e43" />
 <img width="1747" height="737" alt="image" src="https://github.com/user-attachments/assets/3c7ac85d-1d31-44e8-a6d7-807c4d908dd8" />
 <img width="1795" height="827" alt="image" src="https://github.com/user-attachments/assets/e3c0af89-e054-48e5-ac9d-44faa286db53" />
 <img width="1637" height="857" alt="image" src="https://github.com/user-attachments/assets/c11309dc-9af0-424c-abcc-1c0f61451e48" />
 
 ![Add a Tutor Form]
-![Uploading image.png…]()
+<img width="1691" height="862" alt="image" src="https://github.com/user-attachments/assets/bdaad9b1-3834-426e-8127-559bf28de02b" />
+
 
 ## 🚀 How to Run This Project Locally
 
