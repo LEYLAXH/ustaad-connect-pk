@@ -9,10 +9,16 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
+import { Route as FindTutorRouteImport } from './routes/find-tutor'
 import { Route as AddTutorRouteImport } from './routes/add-tutor'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as TutorsIdRouteImport } from './routes/tutors.$id'
 
+const FindTutorRoute = FindTutorRouteImport.update({
+  id: '/find-tutor',
+  path: '/find-tutor',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const AddTutorRoute = AddTutorRouteImport.update({
   id: '/add-tutor',
   path: '/add-tutor',
@@ -32,35 +38,46 @@ const TutorsIdRoute = TutorsIdRouteImport.update({
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/add-tutor': typeof AddTutorRoute
+  '/find-tutor': typeof FindTutorRoute
   '/tutors/$id': typeof TutorsIdRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/add-tutor': typeof AddTutorRoute
+  '/find-tutor': typeof FindTutorRoute
   '/tutors/$id': typeof TutorsIdRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/add-tutor': typeof AddTutorRoute
+  '/find-tutor': typeof FindTutorRoute
   '/tutors/$id': typeof TutorsIdRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/add-tutor' | '/tutors/$id'
+  fullPaths: '/' | '/add-tutor' | '/find-tutor' | '/tutors/$id'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/add-tutor' | '/tutors/$id'
-  id: '__root__' | '/' | '/add-tutor' | '/tutors/$id'
+  to: '/' | '/add-tutor' | '/find-tutor' | '/tutors/$id'
+  id: '__root__' | '/' | '/add-tutor' | '/find-tutor' | '/tutors/$id'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   AddTutorRoute: typeof AddTutorRoute
+  FindTutorRoute: typeof FindTutorRoute
   TutorsIdRoute: typeof TutorsIdRoute
 }
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
+    '/find-tutor': {
+      id: '/find-tutor'
+      path: '/find-tutor'
+      fullPath: '/find-tutor'
+      preLoaderRoute: typeof FindTutorRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/add-tutor': {
       id: '/add-tutor'
       path: '/add-tutor'
@@ -88,6 +105,7 @@ declare module '@tanstack/react-router' {
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   AddTutorRoute: AddTutorRoute,
+  FindTutorRoute: FindTutorRoute,
   TutorsIdRoute: TutorsIdRoute,
 }
 export const routeTree = rootRouteImport
