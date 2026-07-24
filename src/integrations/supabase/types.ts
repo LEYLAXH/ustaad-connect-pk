@@ -14,6 +14,41 @@ export type Database = {
   }
   public: {
     Tables: {
+      reviews: {
+        Row: {
+          comment: string | null
+          created_at: string
+          id: string
+          rating: number
+          reviewer_name: string | null
+          tutor_id: string
+        }
+        Insert: {
+          comment?: string | null
+          created_at?: string
+          id?: string
+          rating: number
+          reviewer_name?: string | null
+          tutor_id: string
+        }
+        Update: {
+          comment?: string | null
+          created_at?: string
+          id?: string
+          rating?: number
+          reviewer_name?: string | null
+          tutor_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "reviews_tutor_id_fkey"
+            columns: ["tutor_id"]
+            isOneToOne: false
+            referencedRelation: "tutors"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       tutors: {
         Row: {
           area: string

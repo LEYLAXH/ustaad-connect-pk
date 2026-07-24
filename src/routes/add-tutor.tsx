@@ -1,6 +1,5 @@
 import { createFileRoute, Link, useNavigate } from "@tanstack/react-router";
 import { useState } from "react";
-import { ArrowLeft, GraduationCap } from "lucide-react";
 import { z } from "zod";
 import { toast } from "sonner";
 import { supabase } from "@/integrations/supabase/client";
@@ -8,6 +7,8 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
+import { Navbar } from "@/components/Navbar";
+
 
 export const Route = createFileRoute("/add-tutor")({
   component: AddTutor,
@@ -84,23 +85,14 @@ function AddTutor() {
 
   return (
     <div className="min-h-screen bg-background">
-      <header className="border-b bg-card">
-        <div className="mx-auto flex max-w-2xl items-center justify-between px-4 py-4">
-          <Link to="/" className="flex items-center gap-2 text-sm text-muted-foreground hover:text-foreground">
-            <ArrowLeft className="h-4 w-4" /> Back
-          </Link>
-          <div className="flex items-center gap-2">
-            <GraduationCap className="h-5 w-5 text-primary" />
-            <span className="font-semibold">Ustaad Finder</span>
-          </div>
-        </div>
-      </header>
+      <Navbar />
 
-      <main className="mx-auto max-w-2xl px-4 py-8">
-        <h1 className="text-2xl font-bold tracking-tight sm:text-3xl">Add a tutor</h1>
-        <p className="mt-1 text-sm text-muted-foreground">
+      <main className="mx-auto max-w-2xl px-4 py-10">
+        <h1 className="font-display text-3xl font-semibold tracking-tight sm:text-4xl">Add a tutor</h1>
+        <p className="mt-2 text-sm text-muted-foreground">
           Fill in the details below. Your listing will appear on the directory immediately.
         </p>
+
 
         <form onSubmit={onSubmit} className="mt-6 grid gap-4">
           <Field label="Full name" name="name" required placeholder="e.g. Ayesha Khan" />
