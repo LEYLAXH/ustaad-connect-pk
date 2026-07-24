@@ -1,29 +1,38 @@
-# Welcome to your Lovable project
+# Ustaad Finder 🎓
 
-This project was built with [Lovable](https://lovable.dev).
+**Ustaad Finder** is a tutor-discovery web app that helps students and parents across Pakistan find the right local tutor for their subject, budget, and area — without relying on word-of-mouth guesswork.
 
-## Build with Lovable
+## The Problem It Solves
 
-Open your project in the [Lovable editor](https://lovable.dev) and keep building.
+Finding a good, affordable tutor nearby is usually a matter of asking around friends and family, with no easy way to compare tutors by subject, price, or location — and no way to know which tutor genuinely fits a specific student's weak areas. Ustaad Finder solves this for **students and parents** searching for tutoring help, and gives them a fast, personalized way to find and reach out to the right match.
 
-- **Ship faster**: describe what you want to build and Lovable handles the code.
-- **Stay in sync**: connect the project to GitHub and every change made in Lovable is committed straight to your repository.
-- **Full ownership**: this code is yours. Push to your repository and your changes sync back into Lovable, ready for your next prompt.
+## 🔗 Live Demo
 
-## Development
+**[https://ustaad-connect-pk.lovable.app](https://ustaad-connect-pk.lovable.app)**
 
-Prefer working locally? You need Node.js and npm — [install with nvm](https://github.com/nvm-sh/nvm#installing-and-updating).
+## ✨ Features
 
-```sh
-git clone <this-repository-url>
-cd <repository-name>
-npm i
-npm run dev
-```
+- **Browse & Search** — View all tutors in a clean card layout showing name, subjects, area, rate, and experience
+- **Filter** — Filter tutors by subject and area/city
+- **Tutor Profiles** — Full profile page per tutor with details and a direct contact option
+- **Add a Tutor** — Anyone can list a tutor through a simple form (name, subjects, area, city, rate, experience, contact info, about)
+- **Reviews & Ratings** — Students can leave a 1-5 star rating and comment on any tutor's profile; average rating is calculated and displayed
+- **Verified Tutor Badge** — Tutors with 3+ reviews and a rating above 4.0 automatically get a "Verified" badge
+- **Top Rated Section** — Homepage highlights the top 3 highest-rated tutors
+- **Find My Tutor (AI Feature)** — Students describe their needs and get an AI-powered tutor match + ready-to-send outreach message (see below)
+- Fully responsive, mobile-friendly design
 
-## Built with
+## 🤖 The AI Feature: "Find My Tutor"
 
-- TanStack Start
-- TypeScript
-- React
-- Tailwind CSS
+This is the core AI-powered feature of the app. A student fills out a short form with:
+- Subject needed
+- Their level (School / Matric / O-Level / A-Level / University)
+- Weak topics (free text)
+- Budget per hour
+- Preferred area/city
+
+The app sends this, along with the live list of tutors from the database, to the **Gemini API**, which returns:
+1. The **top 2-3 best-fit tutors** from the directory, each with a one-line reason why they match
+2. A **short, personalized outreach message** the student can copy and send directly to their top match
+
+### System Prompt Used
