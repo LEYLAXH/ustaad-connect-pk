@@ -57,6 +57,13 @@ function AddTutor() {
       return;
     }
     setSubmitting(true);
+    const { data: userRes } = await supabase.auth.getUser();
+    if (!userRes.user) {
+      setSubmitting(false);
+      toast.error("Please sign in to add a tutor");
+      navigate({ to: "/auth", search: { redirect: "/add-tutor" } });
+      return;
+    }
     const { data, error } = await supabase
       .from("tutors" as never)
       .insert({
@@ -69,6 +76,7 @@ function AddTutor() {
         contact_phone: v.contact_phone || null,
         contact_email: v.contact_email || null,
         bio: v.bio || null,
+        created_by: userRes.user.id,
       } as never)
       .select("id")
       .single();
