@@ -38,19 +38,6 @@ The app sends this, along with the live list of tutors from the database, to the
 1. The **top 2-3 best-fit tutors** from the directory, each with a one-line reason why they match
 2. A **short, personalized outreach message** the student can copy and send directly to their top match
 
-### System Prompt Used
-
-```
-You are a tutor-matching assistant for students in Pakistan. Given a student's 
-subject, level, weak topics, budget, and area, and a list of available tutors 
-with their subjects, rates, and areas, recommend the top 2-3 best-fit tutors 
-with a one-line reason each. Then write a short, natural, polite message 
-(2-3 sentences) the student can send to their top match, mentioning their 
-specific weak topics and needs. Keep the tone warm and respectful, suited to 
-Pakistani parents and students.
-```
-
-The API key is stored securely as an environment variable and is never committed to this repository.
 
 ## 🛠️ Tools, Services & Models Used
 
@@ -65,21 +52,18 @@ The API key is stored securely as an environment variable and is never committed
 
 ## 📸 Screenshots
 ![Homepage]
-<img width="1822" height="652" alt="image" src="https://github.com/user-attachments/assets/a3f9bde3-b4b1-40ad-9802-ef800afc0a1f" />
-<img width="1806" height="856" alt="image" src="https://github.com/user-attachments/assets/8f428108-0fa2-4948-85a4-647427d179dd" />
-<img width="1646" height="822" alt="image" src="https://github.com/user-attachments/assets/fcf414f2-da6c-4bae-91d9-7f1820a5b8ed" />
-<img width="1776" height="856" alt="image" src="https://github.com/user-attachments/assets/3f1b76c5-95c0-476c-9413-1b23e78c74c3" />
+<img width="1741" height="867" alt="image" src="https://github.com/user-attachments/assets/3bb4870e-b641-4811-b63b-2f96c0e56a23" />
+<img width="1736" height="857" alt="image" src="https://github.com/user-attachments/assets/c020b7c9-efa6-45ff-93a8-3eb1f7e0b34c" />
+<img width="1706" height="852" alt="image" src="https://github.com/user-attachments/assets/653688f7-dfea-4a66-b245-e380a13fbe88" />
 
 
 ![Find My Tutor - AI Matching]
-<img width="1832" height="860" alt="image" src="https://github.com/user-attachments/assets/71de6711-eb9e-4e40-b074-d314abdb0e43" />
-<img width="1747" height="737" alt="image" src="https://github.com/user-attachments/assets/3c7ac85d-1d31-44e8-a6d7-807c4d908dd8" />
-<img width="1795" height="827" alt="image" src="https://github.com/user-attachments/assets/e3c0af89-e054-48e5-ac9d-44faa286db53" />
-<img width="1637" height="857" alt="image" src="https://github.com/user-attachments/assets/c11309dc-9af0-424c-abcc-1c0f61451e48" />
+<img width="1527" height="757" alt="image" src="https://github.com/user-attachments/assets/9d3e230e-2fc4-4b0b-b228-6bb5c52862e8" />
+<img width="1547" height="746" alt="image" src="https://github.com/user-attachments/assets/0f248eb2-d5ad-43d3-91ef-071cdce8492b" />
+<img width="1627" height="872" alt="image" src="https://github.com/user-attachments/assets/f32bfef5-5b40-4638-8189-766254a0ecf7" />
 
 ![Add a Tutor Form]
-<img width="1691" height="862" alt="image" src="https://github.com/user-attachments/assets/bdaad9b1-3834-426e-8127-559bf28de02b" />
-
+<img width="1662" height="865" alt="image" src="https://github.com/user-attachments/assets/52e4c696-747f-4aee-beb4-ec5e1f4df942" />
 
 
 ## 🚀 How to Run This Project Locally
