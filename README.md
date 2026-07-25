@@ -6,20 +6,23 @@
 
 Finding a good, affordable tutor nearby is usually a matter of asking around friends and family, with no easy way to compare tutors by subject, price, or location — and no way to know which tutor genuinely fits a specific student's weak areas. Ustaad Finder solves this for **students and parents** searching for tutoring help, and gives them a fast, personalized way to find and reach out to the right match.
 
+
 ## 🔗 Live Demo
 
 **[https://ustaad-connect-pk.lovable.app](https://ustaad-connect-pk.lovable.app)**
 
 ## ✨ Features
 
+- **Authentication** — Email/password sign up and log in via Supabase Auth, with session-aware navbar (log in/out, user identity)
 - **Browse & Search** — View all tutors in a clean card layout showing name, subjects, area, rate, and experience
 - **Filter** — Filter tutors by subject and area/city
-- **Tutor Profiles** — Full profile page per tutor with details and a direct contact option
-- **Add a Tutor** — Anyone can list a tutor through a simple form (name, subjects, area, city, rate, experience, contact info, about)
-- **Reviews & Ratings** — Students can leave a 1-5 star rating and comment on any tutor's profile; average rating is calculated and displayed
-- **Verified Tutor Badge** — Tutors with 3+ reviews and a rating above 4.0 automatically get a "Verified" badge
-- **Top Rated Section** — Homepage highlights the top 3 highest-rated tutors
+- **Tutor Profiles** — Full profile page per tutor with details; contact info (phone/email) is only visible to logged-in users, protecting tutors from public scraping
+- **Add a Tutor** — Only logged-in users can list a tutor, through a simple form (name, subjects, area, city, rate, experience, contact info, about); each listing is linked to its creator's account
+- **Reviews & Ratings** — Only logged-in users can leave a 1-5 star rating and comment on a tutor's profile, one review per user per tutor (prevents duplicate/fake reviews); average rating is calculated and displayed
+- **Verified Tutor Badge** — A manually admin-confirmed badge shown on trustworthy tutor profiles (separate from user-submitted ratings)
+- **Top Rated Section** — Homepage highlights the top 3 highest-rated tutors based on genuine, authenticated reviews
 - **Find My Tutor (AI Feature)** — Students describe their needs and get an AI-powered tutor match + ready-to-send outreach message (see below)
+- **Row-Level Security** — Database access rules ensure public visitors can only read tutor/review data (excluding private contact info), while writes (adding tutors, reviews) require authentication
 - Fully responsive, mobile-friendly design
 
 ## 🤖 The AI Feature: "Find My Tutor"
@@ -36,6 +39,17 @@ The app sends this, along with the live list of tutors from the database, to the
 2. A **short, personalized outreach message** the student can copy and send directly to their top match
 
 ### System Prompt Used
+
+```
+You are a tutor-matching assistant for students in Pakistan. Given a student's 
+subject, level, weak topics, budget, and area, and a list of available tutors 
+with their subjects, rates, and areas, recommend the top 2-3 best-fit tutors 
+with a one-line reason each. Then write a short, natural, polite message 
+(2-3 sentences) the student can send to their top match, mentioning their 
+specific weak topics and needs. Keep the tone warm and respectful, suited to 
+Pakistani parents and students.
+```
+
 The API key is stored securely as an environment variable and is never committed to this repository.
 
 ## 🛠️ Tools, Services & Models Used
@@ -50,7 +64,6 @@ The API key is stored securely as an environment variable and is never committed
 | Version control | GitHub |
 
 ## 📸 Screenshots
-
 ![Homepage]
 <img width="1822" height="652" alt="image" src="https://github.com/user-attachments/assets/a3f9bde3-b4b1-40ad-9802-ef800afc0a1f" />
 <img width="1806" height="856" alt="image" src="https://github.com/user-attachments/assets/8f428108-0fa2-4948-85a4-647427d179dd" />
@@ -66,6 +79,7 @@ The API key is stored securely as an environment variable and is never committed
 
 ![Add a Tutor Form]
 <img width="1691" height="862" alt="image" src="https://github.com/user-attachments/assets/bdaad9b1-3834-426e-8127-559bf28de02b" />
+
 
 
 ## 🚀 How to Run This Project Locally
@@ -89,3 +103,7 @@ You'll also need to set up your own environment variables for Supabase and the G
 - Tailwind CSS
 - Supabase
 - Google Gemini API
+
+
+
+
