@@ -55,6 +55,7 @@ The app sends this, along with the live list of tutors from the database, to the
 <img width="1741" height="867" alt="image" src="https://github.com/user-attachments/assets/3bb4870e-b641-4811-b63b-2f96c0e56a23" />
 <img width="1736" height="857" alt="image" src="https://github.com/user-attachments/assets/c020b7c9-efa6-45ff-93a8-3eb1f7e0b34c" />
 <img width="1706" height="852" alt="image" src="https://github.com/user-attachments/assets/653688f7-dfea-4a66-b245-e380a13fbe88" />
+<img width="1440" height="522" alt="image" src="https://github.com/user-attachments/assets/00c28e13-a8f4-4f40-afa9-d95fb3fab4c3" />
 
 
 ![Find My Tutor - AI Matching]
