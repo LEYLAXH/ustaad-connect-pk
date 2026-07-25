@@ -10,7 +10,7 @@ import { Textarea } from "@/components/ui/textarea";
 import { Navbar } from "@/components/Navbar";
 
 
-export const Route = createFileRoute("/add-tutor")({
+export const Route = createFileRoute("/_authenticated/add-tutor")({
   component: AddTutor,
   head: () => ({
     meta: [
