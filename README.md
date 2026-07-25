@@ -9,7 +9,7 @@ Finding a good, affordable tutor nearby is usually a matter of asking around fri
 
 ## 🔗 Live Demo
 
-**[https://ustaad-connect-pk.lovable.app](https://ustaad-connect-pk.lovable.app)**
+**[https://ustaad-connect-pk.lovable.app]([https://preview--ustaad-connect-pk.lovable.app)**
 
 ## ✨ Features
 
