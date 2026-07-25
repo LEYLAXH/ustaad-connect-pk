@@ -12,6 +12,8 @@ export type Tutor = {
   contact_email: string | null;
   bio: string | null;
   created_at: string;
+  is_verified: boolean;
+  created_by: string | null;
 };
 
 export type Review = {
@@ -20,18 +22,15 @@ export type Review = {
   rating: number;
   comment: string | null;
   reviewer_name: string | null;
+  user_id: string | null;
   created_at: string;
 };
 
 export type TutorWithRating = Tutor & {
   avg_rating: number;
   review_count: number;
-  verified: boolean;
+  verified: boolean; // admin-confirmed (mirrors is_verified)
 };
-
-export function computeVerified(avg: number, count: number): boolean {
-  return count >= 3 && avg > 4.0;
-}
 
 export async function fetchTutors(): Promise<TutorWithRating[]> {
   const [tRes, rRes] = await Promise.all([
@@ -55,7 +54,7 @@ export async function fetchTutors(): Promise<TutorWithRating[]> {
     const agg = map.get(t.id);
     const avg = agg && agg.count > 0 ? agg.sum / agg.count : 0;
     const count = agg?.count ?? 0;
-    return { ...t, avg_rating: avg, review_count: count, verified: computeVerified(avg, count) };
+    return { ...t, avg_rating: avg, review_count: count, verified: !!t.is_verified };
   });
 }
 
@@ -76,7 +75,7 @@ export async function fetchTutorById(id: string): Promise<TutorWithRating | null
   const list = (reviews ?? []) as unknown as Array<{ rating: number }>;
   const count = list.length;
   const avg = count > 0 ? list.reduce((s, r) => s + r.rating, 0) / count : 0;
-  return { ...tutor, avg_rating: avg, review_count: count, verified: computeVerified(avg, count) };
+  return { ...tutor, avg_rating: avg, review_count: count, verified: !!tutor.is_verified };
 }
 
 export async function fetchReviews(tutorId: string): Promise<Review[]> {
@@ -95,6 +94,22 @@ export async function addReview(input: {
   comment?: string | null;
   reviewer_name?: string | null;
 }): Promise<void> {
-  const { error } = await supabase.from("reviews" as never).insert(input as never);
+  const { data: userRes, error: userErr } = await supabase.auth.getUser();
+  if (userErr || !userRes.user) throw new Error("Please sign in to leave a review");
+  const user_id = userRes.user.id;
+
+  const { data: existing, error: exErr } = await supabase
+    .from("reviews" as never)
+    .select("id")
+    .eq("tutor_id", input.tutor_id)
+    .eq("user_id", user_id)
+    .maybeSingle();
+  if (exErr) throw exErr;
+  if (existing) throw new Error("You've already reviewed this tutor");
+
+  const { error } = await supabase.from("reviews" as never).insert({
+    ...input,
+    user_id,
+  } as never);
   if (error) throw error;
 }

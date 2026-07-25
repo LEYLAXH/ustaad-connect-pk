@@ -1,9 +1,11 @@
 import { createFileRoute, Link, useRouter } from "@tanstack/react-router";
 import { useQuery, useQueryClient } from "@tanstack/react-query";
-import { useState } from "react";
-import { ArrowLeft, MapPin, Clock, Mail, Phone, MessageCircle } from "lucide-react";
+import { useEffect, useState } from "react";
+import { ArrowLeft, MapPin, Clock, Mail, Phone, MessageCircle, LogIn } from "lucide-react";
 import { toast } from "sonner";
 import { fetchTutorById, fetchReviews, addReview } from "@/lib/tutors";
+import { supabase } from "@/integrations/supabase/client";
+import { useAuth } from "@/hooks/use-auth";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
@@ -195,10 +197,48 @@ function TutorProfile() {
 }
 
 function ReviewForm({ tutorId, onDone }: { tutorId: string; onDone: () => void }) {
+  const { user, loading } = useAuth();
   const [rating, setRating] = useState(0);
   const [comment, setComment] = useState("");
   const [name, setName] = useState("");
   const [submitting, setSubmitting] = useState(false);
+  const [alreadyReviewed, setAlreadyReviewed] = useState(false);
+
+  useEffect(() => {
+    let cancelled = false;
+    if (!user) { setAlreadyReviewed(false); return; }
+    supabase
+      .from("reviews" as never)
+      .select("id")
+      .eq("tutor_id", tutorId)
+      .eq("user_id", user.id)
+      .maybeSingle()
+      .then(({ data }) => {
+        if (!cancelled) setAlreadyReviewed(!!data);
+      });
+    return () => { cancelled = true; };
+  }, [user, tutorId]);
+
+  if (loading) return null;
+
+  if (!user) {
+    return (
+      <div className="mt-4 flex flex-wrap items-center justify-between gap-3 rounded-2xl border border-dashed border-primary/30 bg-primary-soft/40 p-5">
+        <p className="text-sm text-foreground/80">Sign in to rate and review this tutor.</p>
+        <Link to="/auth" search={{ redirect: `/tutors/${tutorId}` }}>
+          <Button size="sm" className="gap-1.5"><LogIn className="h-4 w-4" /> Sign in to review</Button>
+        </Link>
+      </div>
+    );
+  }
+
+  if (alreadyReviewed) {
+    return (
+      <div className="mt-4 rounded-2xl border border-border/70 bg-card p-5 text-sm text-muted-foreground shadow-[var(--shadow-card)]">
+        You've already reviewed this tutor — thanks for sharing your experience.
+      </div>
+    );
+  }
 
   async function onSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
@@ -218,6 +258,7 @@ function ReviewForm({ tutorId, onDone }: { tutorId: string; onDone: () => void }
       setRating(0);
       setComment("");
       setName("");
+      setAlreadyReviewed(true);
       onDone();
     } catch (err) {
       toast.error(err instanceof Error ? err.message : "Could not submit review");
@@ -237,7 +278,7 @@ function ReviewForm({ tutorId, onDone }: { tutorId: string; onDone: () => void }
           <StarRatingInput value={rating} onChange={setRating} />
         </div>
         <div className="grid gap-1.5">
-          <Label htmlFor="reviewer_name">Your name (optional)</Label>
+          <Label htmlFor="reviewer_name">Display name (optional)</Label>
           <Input
             id="reviewer_name"
             value={name}
