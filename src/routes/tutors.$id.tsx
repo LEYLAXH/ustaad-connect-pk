@@ -1,9 +1,11 @@
 import { createFileRoute, Link, useRouter } from "@tanstack/react-router";
 import { useQuery, useQueryClient } from "@tanstack/react-query";
-import { useState } from "react";
-import { ArrowLeft, MapPin, Clock, Mail, Phone, MessageCircle } from "lucide-react";
+import { useEffect, useState } from "react";
+import { ArrowLeft, MapPin, Clock, Mail, Phone, MessageCircle, LogIn } from "lucide-react";
 import { toast } from "sonner";
 import { fetchTutorById, fetchReviews, addReview } from "@/lib/tutors";
+import { supabase } from "@/integrations/supabase/client";
+import { useAuth } from "@/hooks/use-auth";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
